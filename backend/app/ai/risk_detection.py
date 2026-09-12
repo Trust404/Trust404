@@ -30,6 +30,9 @@ class RiskPattern(BaseModel):
         "PREPAYMENT_REQUEST",
         "PAYMENT_PRESSURE",
         "EXTERNAL_CONTACT",
+        "BANK_TRANSFER_ONLY",
+        "PERSONAL_INFO_REQUEST",
+        "SUSPICIOUS_CONDITION",
     ]
     label: str
     evidence: str

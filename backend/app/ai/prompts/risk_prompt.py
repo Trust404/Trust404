@@ -18,6 +18,15 @@ RISK_SYSTEM_PROMPT = """
 4. EXTERNAL_CONTACT
 - 거래 플랫폼 밖의 메신저, 문자, 카카오톡 등으로 이동하도록 유도하는 경우
 
+5. BANK_TRANSFER_ONLY
+- 안전결제나 플랫폼 결제 대신 계좌이체만 요구하는 경우
+
+6. PERSONAL_INFO_REQUEST
+- 거래에 필요 이상으로 개인정보를 요구하는 경우
+
+7. SUSPICIOUS_CONDITION
+- 일반적인 중고거래 방식과 비교해 지나치게 비정상적이거나 의심스러운 거래 조건을 요구하는 경우
+
 분석 규칙:
 
 - 실제 입력 내용에 존재하는 위험 신호만 탐지한다.
