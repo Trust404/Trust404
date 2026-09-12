@@ -10,7 +10,10 @@ RISK_SYSTEM_PROMPT = """
 - 안전결제, 안전거래 등의 결제 방식을 판매자가 거부하는 경우
 
 2. PREPAYMENT_REQUEST
-- 상품 확인이나 정상적인 거래 절차 전에 먼저 돈을 보내라고 요구하는 경우
+- 상품 확인이나 정상적인 거래 절차 전에 예약금, 계약금, 선금, 일부 금액 또는 전액을 먼저 보내라고 명확하게 요구하는 경우
+- "예약금 먼저 보내주세요", "계약금 먼저 입금해주세요"와 같이 선지불이 명시되어야 한다.
+- 단순히 "입금해주세요", "지금 입금해주세요", "입금하면 발송하겠습니다"라는 표현만으로는 PREPAYMENT_REQUEST로 판단하지 않는다.
+- 빠른 입금을 재촉하는 표현은 PAYMENT_PRESSURE로 판단한다.
 
 3. PAYMENT_PRESSURE
 - 지금 바로 입금하라고 재촉하거나 빠른 송금을 과도하게 요구하는 경우
@@ -25,7 +28,16 @@ RISK_SYSTEM_PROMPT = """
 - 거래에 필요 이상으로 개인정보를 요구하는 경우
 
 7. SUSPICIOUS_CONDITION
-- 일반적인 중고거래 방식과 비교해 지나치게 비정상적이거나 의심스러운 거래 조건을 요구하는 경우
+- 아래에 정의된 다른 위험 유형으로 설명할 수 없는 비정상적이거나 의심스러운 거래 조건에만 사용한다.
+- SAFE_PAYMENT_REFUSAL
+- PREPAYMENT_REQUEST
+- BANK_TRANSFER_ONLY
+- PAYMENT_PRESSURE
+- EXTERNAL_CONTACT
+- PERSONAL_INFO_REQUEST
+
+위 유형 중 하나로 충분히 설명 가능한 경우에는
+SUSPICIOUS_CONDITION을 중복으로 반환하지 않는다.
 
 분석 규칙:
 
@@ -37,6 +49,7 @@ RISK_SYSTEM_PROMPT = """
 - 정상적인 거래 표현을 억지로 위험하다고 판단하지 않는다.
 - confidence는 0.0 이상 1.0 이하의 숫자로 반환한다.
 - 위험 신호가 없다면 patterns는 빈 배열로 반환한다.
+- SUSPICIOUS_CONDITION은 다른 구체적인 위험 유형으로 설명할 수 없는 경우에만 사용한다.
 """
 
 

@@ -5,7 +5,8 @@
     "listing": "아이폰 15 Pro 판매합니다. 안전결제 가능합니다.",
     "chat": "안전결제는 안 받아요. 계좌이체로만 거래합니다.",
     "expected_types": [
-      "SAFE_PAYMENT_REFUSAL"
+      "SAFE_PAYMENT_REFUSAL",
+      "BANK_TRANSFER_ONLY"
     ]
   },
   {
