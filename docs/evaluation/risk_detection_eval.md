@@ -1,47 +1,44 @@
-# Risk Detection AI Evaluation
+## Prompt 버전 기록
 
-## 기본 정보
+### Prompt v1
 
-| 항목          | 내용                                              |
-| ------------- | ------------------------------------------------- |
-| 담당          | A - AI Risk Detection Engineer                    |
-| 모델          | gpt-5-nano                                        |
-| 평가 데이터   | data/evaluation/risk_cases.json                   |
-| 테스트 케이스 | 10개                                              |
-| 평가 방식     | expected_types와 실제 탐지 patterns의 Exact Match |
-| 평가 대상     | Risk Detection Prompt                             |
+초기 Risk Detection Prompt.
+
+평가 결과:
+
+- 전체 케이스: 10
+- PASS: 7
+- FAIL: 3
+- Exact Match: 70.0%
+
+주요 문제:
+
+- RISK_001: Ground Truth에 `BANK_TRANSFER_ONLY` 누락
+- RISK_005: `PAYMENT_PRESSURE` 상황을 `PREPAYMENT_REQUEST`까지 탐지
+- RISK_010: `SUSPICIOUS_CONDITION` 중복 탐지
 
 ---
 
-## 1차 평가
+### Prompt v2
 
-### 결과
+v1 평가 결과를 바탕으로 다음을 수정함.
 
-| 항목        |  결과 |
-| ----------- | ----: |
-| 전체 케이스 |    10 |
-| PASS        |     7 |
-| FAIL        |     3 |
-| Exact Match | 70.0% |
+- `PREPAYMENT_REQUEST` 판정 조건 구체화
+- 단순 입금 재촉은 `PAYMENT_PRESSURE`로 분리
+- `SUSPICIOUS_CONDITION`을 fallback 유형으로 제한
+- RISK_001 Ground Truth 수정
 
-### 실패 사례
+재평가 결과:
 
-| Case     | 문제                               |
-| -------- | ---------------------------------- |
-| RISK_001 | BANK_TRANSFER_ONLY가 추가 탐지됨   |
-| RISK_005 | PREPAYMENT_REQUEST가 추가 탐지됨   |
-| RISK_010 | SUSPICIOUS_CONDITION이 추가 탐지됨 |
+- 전체 케이스: 10
+- PASS: 9
+- FAIL: 1
+- Exact Match: 90.0%
 
-### 분석
+남은 문제:
 
-#### RISK_001
+- RISK_005에서 `PREPAYMENT_REQUEST` 추가 탐지
 
-입력 채팅:
-
-> 안전결제는 안 받아요. 계좌이체로만 거래합니다.
-
-기존 Ground Truth:
-
-```text
-SAFE_PAYMENT_REFUSAL
-```
+> 참고: v1 → v2의 70% → 90% 변화는 Prompt 개선만의 효과가 아니다.  
+> RISK_001의 Ground Truth 수정도 포함되어 있으므로  
+> Prompt 성능 향상과 평가 데이터 정제가 함께 이루어진 결과이다.
