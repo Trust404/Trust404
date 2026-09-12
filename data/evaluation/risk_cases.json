@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "RISK_001",
+    "description": "안전결제 거부",
+    "listing": "아이폰 15 Pro 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 받아요. 계좌이체로만 거래합니다.",
+    "expected_types": [
+      "SAFE_PAYMENT_REFUSAL",
+      "BANK_TRANSFER_ONLY"
+    ]
+  },
+  {
+    "case_id": "RISK_002",
+    "description": "명확한 선입금 요구",
+    "listing": "에어팟 Pro 판매합니다. 택배 거래 가능합니다.",
+    "chat": "구매하시려면 물건 확인 전에 예약금 5만원 먼저 보내주세요.",
+    "expected_types": [
+      "PREPAYMENT_REQUEST"
+    ]
+  },
+  {
+    "case_id": "RISK_003",
+    "description": "입금 재촉",
+    "listing": "닌텐도 스위치 판매합니다.",
+    "chat": "다른 분도 기다리고 있어서 10분 안에 입금하셔야 해요. 지금 바로 보내주세요.",
+    "expected_types": [
+      "PAYMENT_PRESSURE"
+    ]
+  },
+  {
+    "case_id": "RISK_004",
+    "description": "외부 메신저 이동 유도",
+    "listing": "갤럭시 S25 판매합니다.",
+    "chat": "여기 채팅은 불편하니까 카카오톡으로 연락 주세요. 아이디 알려드릴게요.",
+    "expected_types": [
+      "EXTERNAL_CONTACT"
+    ]
+  },
+  {
+    "case_id": "RISK_005",
+    "description": "안전결제 거부와 입금 재촉",
+    "listing": "아이패드 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 합니다. 지금 바로 입금하시면 오늘 발송할게요.",
+    "expected_types": [
+      "SAFE_PAYMENT_REFUSAL",
+      "PAYMENT_PRESSURE"
+    ]
+  },
+  {
+    "case_id": "RISK_006",
+    "description": "선입금 요구와 외부 연락 유도",
+    "listing": "그래픽카드 판매합니다.",
+    "chat": "예약하려면 먼저 3만원 보내주시고 자세한 이야기는 카톡으로 하죠.",
+    "expected_types": [
+      "PREPAYMENT_REQUEST",
+      "EXTERNAL_CONTACT"
+    ]
+  },
+  {
+    "case_id": "RISK_007",
+    "description": "정상적인 안전결제 거래",
+    "listing": "아이폰 판매합니다. 안전결제 가능합니다.",
+    "chat": "네, 안전결제로 진행하시면 됩니다. 확인 후 천천히 결제해주세요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "RISK_008",
+    "description": "정상적인 가격 협상",
+    "listing": "키보드 8만원에 판매합니다.",
+    "chat": "7만원까지 가능할까요?",
+    "expected_types": []
+  },
+  {
+    "case_id": "RISK_009",
+    "description": "정상적인 택배 거래",
+    "listing": "책 세트 판매합니다. 택배 가능합니다.",
+    "chat": "주소 알려주시면 포장해서 내일 발송하고 송장번호 보내드릴게요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "RISK_010",
+    "description": "복합 고위험 거래",
+    "listing": "맥북 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 하고요. 예약하려면 지금 계약금 먼저 보내주세요. 다른 사람도 보고 있으니 빨리 입금해주세요. 자세한 건 카톡으로 이야기하죠.",
+    "expected_types": [
+      "SAFE_PAYMENT_REFUSAL",
+      "PREPAYMENT_REQUEST",
+      "PAYMENT_PRESSURE",
+      "EXTERNAL_CONTACT"
+    ]
+  }
+]
