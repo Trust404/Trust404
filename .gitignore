@@ -1,6 +1,13 @@
+# Environment
 .env
 *.env
-__pycache__/
-*.pyc
+
+# Python
 .venv/
 venv/
+__pycache__/
+*.pyc
+
+# OS / Editor
+.DS_Store
+Thumbs.db
