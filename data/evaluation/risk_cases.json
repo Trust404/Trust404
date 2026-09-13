@@ -88,5 +88,95 @@
       "PAYMENT_PRESSURE",
       "EXTERNAL_CONTACT"
     ]
-  }
+  },
+{
+  "case_id": "RISK_011",
+  "description": "계좌이체만 요구",
+  "listing": "노트북 판매합니다. 결제 방식은 협의 가능합니다.",
+  "chat": "저는 계좌이체만 받아요. 다른 결제 방식은 안 합니다.",
+  "expected_types": [
+    "BANK_TRANSFER_ONLY"
+  ]
+},
+{
+  "case_id": "RISK_012",
+  "description": "정상적인 계좌이체 안내",
+  "listing": "책상 판매합니다. 직거래 가능합니다.",
+  "chat": "직거래하실 때 물건 확인하시고 괜찮으시면 그때 계좌이체하셔도 됩니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_013",
+  "description": "과도한 개인정보 요구",
+  "listing": "카메라 판매합니다.",
+  "chat": "거래 전에 주민등록번호와 신분증 앞뒤 사진을 보내주세요.",
+  "expected_types": [
+    "PERSONAL_INFO_REQUEST"
+  ]
+},
+{
+  "case_id": "RISK_014",
+  "description": "정상적인 배송 정보 요청",
+  "listing": "운동화 판매합니다. 택배 가능합니다.",
+  "chat": "택배 보내려면 받으실 분 성함, 주소, 연락처 부탁드립니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_015",
+  "description": "정상적인 연락처 교환",
+  "listing": "의자 판매합니다. 직거래 가능합니다.",
+  "chat": "도착하시면 연락 주세요. 전화번호는 010-1234-5678입니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_016",
+  "description": "외부 메신저 이동 유도",
+  "listing": "태블릿 판매합니다.",
+  "chat": "여기 말고 텔레그램으로 이야기하죠. 제 아이디는 seller123입니다.",
+  "expected_types": [
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_017",
+  "description": "기타 의심스러운 거래 조건",
+  "listing": "게임기 판매합니다.",
+  "chat": "상품 상태 확인은 제가 지정한 별도의 인증 절차를 완료한 뒤에만 가능합니다.",
+  "expected_types": [
+    "SUSPICIOUS_CONDITION"
+  ]
+},
+{
+  "case_id": "RISK_018",
+  "description": "개인정보 요구와 외부 연락 유도",
+  "listing": "스마트폰 판매합니다.",
+  "chat": "신분증 사진 먼저 보내주시고, 이후 대화는 카카오톡으로 진행하죠.",
+  "expected_types": [
+    "PERSONAL_INFO_REQUEST",
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_019",
+  "description": "안전결제 거부와 계좌이체만 요구",
+  "listing": "아이패드 판매합니다. 안전결제 가능합니다.",
+  "chat": "안전결제는 사용하지 않습니다. 계좌이체만 가능합니다.",
+  "expected_types": [
+    "SAFE_PAYMENT_REFUSAL",
+    "BANK_TRANSFER_ONLY"
+  ]
+},
+{
+  "case_id": "RISK_020",
+  "description": "복합 위험 거래",
+  "listing": "맥북 판매합니다. 안전결제 가능합니다.",
+  "chat": "안전결제는 안 하고 계좌이체만 받아요. 예약하려면 계약금 10만원 먼저 보내주시고, 다른 구매자도 있으니 지금 입금해주세요. 이후 대화는 카톡으로 하겠습니다.",
+  "expected_types": [
+    "SAFE_PAYMENT_REFUSAL",
+    "BANK_TRANSFER_ONLY",
+    "PREPAYMENT_REQUEST",
+    "PAYMENT_PRESSURE",
+    "EXTERNAL_CONTACT"
+  ]
+}
 ]
