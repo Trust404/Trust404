@@ -265,5 +265,66 @@
   "chat": "네, 50만원이고 택배 거래 가능한 것 확인했습니다.",
   "expected_types": [],
   "expected_trade_stage": "UNKNOWN"
-}
+},
+ {
+    "case_id": "B036",
+    "description": "판매자가 판매글 가격보다 낮은 가격을 제안한 정상 가격 조정",
+    "listing": "판매 가격은 50만원입니다.",
+    "chat": "판매자: 빨리 판매하고 싶어서 48만원에 드릴 수 있습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B037",
+    "description": "상품 가격은 유지되고 배송비만 별도로 안내한 정상 거래",
+    "listing": "상품 가격은 50만원입니다. 택배 거래 가능합니다.",
+    "chat": "상품 가격은 50만원이고 택배비 3천원은 별도입니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B038",
+    "description": "택배 가능 조건은 유지되고 택배사만 구체화된 정상 거래",
+    "listing": "택배 거래 가능합니다.",
+    "chat": "네, 택배 가능합니다. 우체국 택배로 보내드릴게요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B039",
+    "description": "중고 상품 상태를 채팅에서 더 구체적으로 설명한 정상 거래",
+    "listing": "사용감이 있는 중고 아이폰입니다.",
+    "chat": "사용감은 있고 모서리에 작은 생활기스가 하나 있습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B040",
+    "description": "곧 송금하겠다는 표현만 있고 아직 결제하지 않은 거래 단계",
+    "listing": "아이폰 판매합니다. 가격은 70만원입니다.",
+    "chat": "구매자: 확인했습니다. 잠시 후 70만원 송금하겠습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "BEFORE_PAYMENT"
+  },
+  {
+    "case_id": "B041",
+    "description": "판매자가 결제를 요청했지만 구매자가 아직 결제하지 않은 거래 단계",
+    "listing": "아이폰 판매합니다.",
+    "chat": "판매자: 지금 입금해 주세요. 구매자: 아직 송금하지 않았습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "BEFORE_PAYMENT"
+  },
+  {
+    "case_id": "B042",
+    "description": "결제 완료 후 판매자 답변이 늦지만 피해가 확인되지 않은 거래 단계",
+    "listing": "아이폰 판매합니다. 택배 거래 가능합니다.",
+    "chat": "구매자: 어제 결제 완료했습니다. 판매자 답변이 조금 늦지만 오늘 발송 예정입니다.",
+    "expected_types": [],
+    "expected_trade_stage": "AFTER_PAYMENT"
+  },
+  {
+    "case_id": "B043",
+    "description": "결제 완료 후 상품 미수령과 연락 두절로 피해가 확인된 거래 단계",
+    "listing": "아이폰 판매합니다.",
+    "chat": "이미 결제했습니다. 약속한 배송일이 지났는데 상품을 받지 못했고 판매자도 연락이 두절됐습니다. 피해가 발생했습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "CONFIRMED_DAMAGE"
+  }
+
 ]
