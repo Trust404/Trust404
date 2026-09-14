@@ -4,6 +4,8 @@ from pydantic import BaseModel
 
 from app.ai.risk_detection import RiskPattern, analyze_risk
 from app.ai.consistency import Inconsistency, analyze_consistency
+from app.services.risk_engine import RiskLevel, calculate_risk
+from app.services.guidance import get_guidance_structure
 
 
 app = FastAPI(
@@ -28,10 +30,13 @@ class AnalyzeRequest(BaseModel):
 
 
 class AnalyzeResponse(BaseModel):
+    risk_score: int
+    risk_level: RiskLevel
     patterns: list[RiskPattern]
-    summary: str
     inconsistencies: list[Inconsistency]
     trade_stage: str
+    summary: str
+    checkpoints: list[str]
 
 
 @app.get("/")
@@ -52,11 +57,23 @@ def analyze(request: AnalyzeRequest):
             chat=request.chat,
         )
 
-        return AnalyzeResponse(
+        risk_score, risk_level = calculate_risk(
             patterns=risk_result.patterns,
-            summary=risk_result.summary,
+            inconsistencies=consistency_result.inconsistencies,
+        )
+
+        guidance = get_guidance_structure(
+            consistency_result.trade_stage
+        )
+
+        return AnalyzeResponse(
+            risk_score=risk_score,
+            risk_level=risk_level,
+            patterns=risk_result.patterns,
             inconsistencies=consistency_result.inconsistencies,
             trade_stage=consistency_result.trade_stage,
+            summary=risk_result.summary,
+            checkpoints=guidance["actions"],
         )
 
     except ValueError as error:

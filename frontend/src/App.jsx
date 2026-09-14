@@ -85,6 +85,12 @@ function App() {
           <section className="result-section">
             <h2>분석 결과</h2>
 
+            <div className="result-card">
+              <strong>거래 위험도</strong>
+              <p>위험 점수: {result.risk_score} / 100</p>
+              <p>위험 등급: {result.risk_level}</p>
+            </div>
+
             <h3>위험 신호</h3>
 
             {result.patterns.length === 0 ? (
@@ -94,13 +100,12 @@ function App() {
                 <div className="result-card" key={index}>
                   <strong>{pattern.label}</strong>
                   <p>근거: {pattern.evidence}</p>
-                  <p>신뢰도: {Math.round(pattern.confidence * 100)}%</p>
+                  <p>
+                    신뢰도: {Math.round(pattern.confidence * 100)}%
+                  </p>
                 </div>
               ))
             )}
-
-            <h3>요약</h3>
-            <p>{result.summary}</p>
 
             <h3>판매글 · 채팅 불일치</h3>
 
@@ -110,14 +115,33 @@ function App() {
               result.inconsistencies.map((item, index) => (
                 <div className="result-card" key={index}>
                   <strong>{item.type}</strong>
-                  <p>{item.reason}</p>
+                  <p>판매글 근거: {item.listing_evidence}</p>
+                  <p>채팅 근거: {item.chat_evidence}</p>
                   <p>심각도: {item.severity}</p>
+                  <p>이유: {item.reason}</p>
                 </div>
               ))
             )}
 
             <h3>거래 단계</h3>
             <p>{result.trade_stage}</p>
+
+            <h3>분석 요약</h3>
+            <p>{result.summary}</p>
+
+            <h3>확인 체크포인트</h3>
+
+            {result.checkpoints.length === 0 ? (
+              <p>추가 확인 사항이 없습니다.</p>
+            ) : (
+              <div className="result-card">
+                <ul>
+                  {result.checkpoints.map((checkpoint, index) => (
+                    <li key={index}>{checkpoint}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </section>
         )}
       </main>
