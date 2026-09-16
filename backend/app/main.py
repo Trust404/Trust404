@@ -29,6 +29,12 @@ class AnalyzeRequest(BaseModel):
     chat: str
 
 
+class GuidanceResponse(BaseModel):
+    goal: str
+    actions: list[str]
+    requires_official_source: bool
+
+
 class AnalyzeResponse(BaseModel):
     risk_score: int
     risk_level: RiskLevel
@@ -36,7 +42,12 @@ class AnalyzeResponse(BaseModel):
     inconsistencies: list[Inconsistency]
     trade_stage: str
     summary: str
+
+    # 기존 React 호환을 위해 일단 유지
     checkpoints: list[str]
+
+    # 9/15 Guidance 전체 정보
+    guidance: GuidanceResponse
 
 
 @app.get("/")
@@ -58,9 +69,10 @@ def analyze(request: AnalyzeRequest):
         )
 
         risk_score, risk_level = calculate_risk(
-            patterns=risk_result.patterns,
-            inconsistencies=consistency_result.inconsistencies,
-        )
+    patterns=risk_result.patterns,
+    inconsistencies=consistency_result.inconsistencies,
+    trade_stage=consistency_result.trade_stage,
+)
 
         guidance = get_guidance_structure(
             consistency_result.trade_stage
@@ -73,7 +85,16 @@ def analyze(request: AnalyzeRequest):
             inconsistencies=consistency_result.inconsistencies,
             trade_stage=consistency_result.trade_stage,
             summary=risk_result.summary,
+
+            # 기존 화면용
             checkpoints=guidance["actions"],
+
+            # 새 Guidance 전체 정보
+            guidance=GuidanceResponse(
+                goal=guidance["goal"],
+                actions=guidance["actions"],
+                requires_official_source=guidance["requires_official_source"],
+            ),
         )
 
     except ValueError as error:

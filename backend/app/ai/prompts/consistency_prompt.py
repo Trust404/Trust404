@@ -46,12 +46,25 @@ CONSISTENCY_SYSTEM_PROMPT = """
 현재 거래 단계 trade_stage는 다음 값 중 하나를 사용한다.
 
 - BEFORE_PAYMENT: 아직 송금 전
-- AFTER_PAYMENT: 송금 완료
+- AFTER_PAYMENT: 송금 또는 결제는 완료했지만 상품 미수령,
+  판매자 연락 두절 등 실제 피해가 확인되지 않은 정상 진행 상태
 - SUSPECTED_FRAUD: 사기가 의심되는 상황
 - CONFIRMED_DAMAGE: 실제 피해가 확인된 상황
 - UNKNOWN: 입력만으로 거래 단계를 판단하기 어려운 상황
 
 trade_stage 판단 우선순위:
+
+중요한 우선 판단 규칙:
+
+- 단순히 결제 또는 송금만 완료된 상태는 AFTER_PAYMENT다.
+- 그러나 결제 또는 송금 이후 상품 미수령, 판매자 연락 두절,
+  약속 불이행 등 실제 금전적 피해가 입력에 명시되어 있다면
+  AFTER_PAYMENT를 사용하지 않고 CONFIRMED_DAMAGE를 사용한다.
+- 특히 "이미 송금했는데 상품을 받지 못했다",
+  "결제했지만 판매자가 연락되지 않는다",
+  "송금 후 상품 미수령과 연락 두절이 발생했다"와 같은 상황은
+  CONFIRMED_DAMAGE로 판단한다.
+- CONFIRMED_DAMAGE 조건이 충족되면 AFTER_PAYMENT보다 항상 우선한다.
 
 1. 실제 피해가 확인된 경우 CONFIRMED_DAMAGE를 사용한다.
 - 송금 또는 결제 이후 상품을 받지 못했거나, 판매자 연락 두절 등 실제 피해가 명확한 경우
