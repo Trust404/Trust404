@@ -191,3 +191,19 @@ API 안정성과 반복 실행 시 분류 일관성을 검증함.
 
 현재 알려진 경계 사례 1건을 제외하고
 정상 거래 오탐, 복합 위험 패턴, 외부 연락 유도, timeout 처리 모두 안정적으로 동작함.
+
+#### 긴 입력 테스트
+
+여러 정상 문장과 복수의 위험 신호가 함께 포함된 긴 입력을 추가 검증함.
+
+최종 테스트에서 다음 5개 위험 유형을 모두 탐지함.
+
+- `SAFE_PAYMENT_REFUSAL`
+- `BANK_TRANSFER_ONLY`
+- `PAYMENT_PRESSURE`
+- `PREPAYMENT_REQUEST`
+- `EXTERNAL_CONTACT`
+
+반복 실행 중 한 차례 `SAFE_PAYMENT_REFUSAL` 누락이 관찰되었으며,
+LLM 기반 분류의 출력 변동 가능성을 잔여 한계로 기록함.
+
