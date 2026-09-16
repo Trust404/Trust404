@@ -128,7 +128,17 @@ function App() {
 
             <h3>분석 요약</h3>
             <p>{result.summary}</p>
+<h3>대응 가이드</h3>
 
+<div className="result-card">
+  <p>{result.guidance.goal}</p>
+
+  {result.guidance.requires_official_source && (
+    <p>
+      공식 기관의 신고·피해 대응 절차 확인이 필요한 단계입니다.
+    </p>
+  )}
+</div>
             <h3>확인 체크포인트</h3>
 
             {result.checkpoints.length === 0 ? (
