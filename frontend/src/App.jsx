@@ -33,10 +33,11 @@ function App() {
       const data = await response.json()
       setResult(data)
     } catch (err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
+  console.error(err)
+  setError('분석 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
+} finally {
+  setLoading(false)
+}
   }
 
   return (

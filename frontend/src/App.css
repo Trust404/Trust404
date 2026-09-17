@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #root {
   width: 100%;
 }
@@ -40,12 +44,17 @@
 }
 
 .input-group textarea {
+  width: 100%;
   min-height: 180px;
   padding: 16px;
+
   border: 1px solid #d0d0d0;
   border-radius: 8px;
+
   font-size: 16px;
   font-family: inherit;
+  line-height: 1.5;
+
   resize: vertical;
 }
 
@@ -55,12 +64,20 @@
 }
 
 .analyze-button {
+  width: 100%;
   padding: 14px 20px;
+
   border: none;
   border-radius: 8px;
+
   font-size: 16px;
   font-weight: 600;
+
   cursor: pointer;
+}
+
+.analyze-button:hover:not(:disabled) {
+  opacity: 0.85;
 }
 
 .analyze-button:disabled {
@@ -75,6 +92,7 @@
 }
 
 .result-section h2 {
+  margin-top: 0;
   margin-bottom: 24px;
 }
 
@@ -86,16 +104,58 @@
 .result-card {
   margin-bottom: 12px;
   padding: 16px;
+
   border: 1px solid #ddd;
   border-radius: 8px;
+
+  line-height: 1.5;
 }
 
 .result-card p {
   margin: 8px 0 0;
 }
 
+.result-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.result-card li + li {
+  margin-top: 8px;
+}
+
 .error-message {
   padding: 16px;
+
   border: 1px solid #ccc;
   border-radius: 8px;
+
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 24px 20px;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .form {
+    gap: 20px;
+  }
+
+  .input-group textarea {
+    min-height: 180px;
+    padding: 14px;
+  }
+
+  .result-card {
+    padding: 14px;
+  }
 }
