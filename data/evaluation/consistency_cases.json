@@ -1,0 +1,395 @@
+[
+  {
+    "case_id": "B001",
+    "description": "안전결제 가능이라고 했지만 채팅에서 안전결제를 거부",
+    "listing": "아이폰 15 Pro 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 받아요. 계좌이체로 보내주세요.",
+    "expected_types": ["PAYMENT_METHOD_MISMATCH"]
+  },
+  {
+    "case_id": "B002",
+    "description": "계좌이체 가능이라고 했지만 채팅에서 안전결제만 요구",
+    "listing": "계좌이체 가능합니다.",
+    "chat": "계좌이체는 안 됩니다. 안전결제로만 거래할게요.",
+    "expected_types": ["PAYMENT_METHOD_MISMATCH"]
+  },
+  {
+    "case_id": "B003",
+    "description": "안전결제와 계좌이체 모두 가능에서 계좌이체만 선택한 정상 거래",
+    "listing": "안전결제와 계좌이체 모두 가능합니다.",
+    "chat": "그럼 계좌이체로 진행하겠습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B004",
+    "description": "판매글 가격과 채팅에서 요구하는 가격이 다름",
+    "listing": "아이폰 판매합니다. 가격은 100만원입니다.",
+    "chat": "실제 판매 가격은 120만원입니다.",
+    "expected_types": ["PRICE_MISMATCH"]
+  },
+  {
+    "case_id": "B005",
+    "description": "판매글보다 높은 가격을 확정적으로 요구",
+    "listing": "판매 가격 50만원입니다.",
+    "chat": "50만원에는 판매하지 않고 60만원 받아야 합니다.",
+    "expected_types": ["PRICE_MISMATCH"]
+  },
+  {
+    "case_id": "B006",
+    "description": "구매자가 가격을 제안했지만 판매자가 확정하지 않은 정상 협상",
+    "listing": "가격은 30만원입니다.",
+    "chat": "구매자: 28만원에 가능할까요? 판매자: 생각해볼게요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B007",
+    "description": "택배 가능이라고 했지만 채팅에서 택배 불가",
+    "listing": "택배 거래 가능합니다.",
+    "chat": "택배는 안 됩니다. 직접 오셔야 합니다.",
+    "expected_types": ["DELIVERY_METHOD_MISMATCH"]
+  },
+  {
+    "case_id": "B008",
+    "description": "직거래만 가능이라고 했지만 채팅에서 택배만 가능",
+    "listing": "직거래만 가능합니다.",
+    "chat": "직거래는 어렵고 택배로만 보내드릴게요.",
+    "expected_types": ["DIRECT_TRADE_MISMATCH"]
+  },
+  {
+    "case_id": "B009",
+    "description": "택배 가능 조건이 판매글과 채팅에서 동일",
+    "listing": "택배 거래 가능합니다.",
+    "chat": "네, 택배로 보내드릴 수 있습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B010",
+    "description": "결제 방식과 가격이 동시에 불일치",
+    "listing": "가격은 80만원이고 안전결제 가능합니다.",
+    "chat": "90만원 받아야 하고 안전결제는 안 받습니다. 계좌이체만 가능합니다.",
+    "expected_types": [
+      "PAYMENT_METHOD_MISMATCH",
+      "PRICE_MISMATCH"
+    ]
+  },
+  {
+    "case_id": "B011",
+    "description": "결제 방식과 배송 방식이 동시에 불일치",
+    "listing": "안전결제 가능하고 택배 거래 가능합니다.",
+    "chat": "안전결제는 안 받고 계좌이체만 받습니다. 택배도 안 되고 직거래만 합니다.",
+    "expected_types": [
+      "PAYMENT_METHOD_MISMATCH",
+      "DELIVERY_METHOD_MISMATCH"
+    ]
+  },
+  {
+    "case_id": "B012",
+    "description": "판매글과 채팅의 모든 거래 조건이 일치하는 정상 거래",
+    "listing": "가격은 70만원입니다. 안전결제 가능하고 택배 가능합니다.",
+    "chat": "네, 70만원에 안전결제로 진행하고 택배로 보내드리겠습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B013",
+    "description": "미개봉 상품이라고 했지만 채팅에서 사용 이력을 밝힘",
+    "listing": "아이폰 15 Pro 미개봉 새상품입니다.",
+    "chat": "사실 개봉해서 일주일 정도 사용했습니다.",
+    "expected_types": ["ITEM_CONDITION_MISMATCH"]
+  },
+  {
+    "case_id": "B014",
+    "description": "상품 상태가 판매글과 채팅에서 동일",
+    "listing": "개봉 후 일주일 사용한 상품입니다.",
+    "chat": "네, 설명대로 개봉해서 일주일 정도 사용했습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B015",
+    "description": "직거래 가능이라고 했지만 채팅에서 직거래를 거부",
+    "listing": "서울에서 직거래 가능합니다.",
+    "chat": "직거래는 안 합니다. 택배로만 거래합니다.",
+    "expected_types": ["DIRECT_TRADE_MISMATCH"]
+  },
+  {
+    "case_id": "B016",
+    "description": "직거래 조건이 판매글과 채팅에서 동일",
+    "listing": "서울에서 직거래 가능합니다.",
+    "chat": "네, 서울에서 직거래 가능합니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B017",
+    "description": "판매글의 구성품 포함 조건과 채팅의 실제 조건이 다름",
+    "listing": "정품 충전기와 박스를 모두 포함해서 판매합니다.",
+    "chat": "충전기와 박스는 드리지 않고 본체만 판매합니다.",
+    "expected_types": ["OTHER_CONDITION_MISMATCH"]
+  },
+  {
+    "case_id": "B018",
+    "description": "구성품 조건이 판매글과 채팅에서 동일",
+    "listing": "본체와 정품 충전기를 함께 판매합니다.",
+    "chat": "네, 설명대로 본체와 정품 충전기를 같이 드립니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B019",
+    "description": "아직 결제하지 않은 거래 단계",
+    "listing": "아이폰 판매합니다. 가격은 80만원입니다.",
+    "chat": "아직 송금하지 않았습니다. 결제 전에 확인 중입니다.",
+    "expected_types": [],
+    "expected_trade_stage": "BEFORE_PAYMENT"
+  },
+  {
+    "case_id": "B020",
+    "description": "이미 결제를 완료한 거래 단계",
+    "listing": "아이폰 판매합니다. 가격은 80만원입니다.",
+    "chat": "방금 80만원 송금 완료했습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "AFTER_PAYMENT"
+  },
+  {
+    "case_id": "B021",
+    "description": "거래 과정에서 사기가 의심되는 단계",
+    "listing": "안전결제 가능합니다.",
+    "chat": "안전결제는 안 됩니다. 계좌이체만 가능해서 사기가 의심됩니다. 아직 송금하지 않았습니다.",
+    "expected_types": ["PAYMENT_METHOD_MISMATCH"],
+    "expected_trade_stage": "SUSPECTED_FRAUD"
+  },
+  {
+    "case_id": "B022",
+    "description": "송금 후 실제 피해가 확인된 단계",
+    "listing": "아이폰 판매합니다.",
+    "chat": "이미 송금했는데 판매자가 연락을 끊었고 상품도 받지 못했습니다. 피해가 발생했습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "CONFIRMED_DAMAGE"
+  },
+  {
+    "case_id": "B023",
+    "description": "입력만으로 거래 단계를 판단할 수 없음",
+    "listing": "아이폰 판매합니다.",
+    "chat": "상품 상태가 어떤가요?",
+    "expected_types": [],
+    "expected_trade_stage": "UNKNOWN"
+  },
+{
+  "case_id": "B024",
+  "description": "구매자의 가격 제안을 판매자가 수락한 정상 가격 협상",
+  "listing": "판매 가격은 30만원입니다.",
+  "chat": "구매자: 28만원에 가능할까요? 판매자: 네, 28만원에 판매하겠습니다.",
+  "expected_types": []
+},
+{
+  "case_id": "B025",
+  "description": "판매글의 발송 일정과 채팅에서 확정한 발송 일정이 다름",
+  "listing": "택배 거래 가능합니다. 오늘 발송 가능합니다.",
+  "chat": "택배 거래는 가능합니다. 다만 발송은 내일 하겠습니다.",
+  "expected_types": ["OTHER_CONDITION_MISMATCH"]
+},
+{
+  "case_id": "B026",
+  "description": "상품 상태 표현이 다르지만 서로 모순되지 않는 정상 거래",
+  "listing": "아이폰 중고 제품입니다. 사용감이 조금 있습니다.",
+  "chat": "생활기스가 조금 있지만 정상적으로 사용한 중고 제품입니다.",
+  "expected_types": []
+},
+{
+  "case_id": "B027",
+  "description": "정상 작동 상품이라고 했지만 채팅에서 기능 고장을 밝힘",
+  "listing": "모든 기능 정상 작동하는 아이폰입니다.",
+  "chat": "카메라는 현재 고장 나서 작동하지 않습니다.",
+  "expected_types": ["ITEM_CONDITION_MISMATCH"]
+},
+{
+  "case_id": "B028",
+  "description": "직거래 가능 조건은 유지되고 장소만 구체화된 정상 거래",
+  "listing": "서울에서 직거래 가능합니다.",
+  "chat": "서울 강남역에서 직거래하면 좋겠습니다.",
+  "expected_types": []
+},
+{
+  "case_id": "B029",
+  "description": "판매글에 포함된 구성품 일부를 채팅에서 제외",
+  "listing": "본체, 정품 충전기, 박스를 모두 포함해서 판매합니다.",
+  "chat": "박스는 분실해서 본체와 충전기만 드릴 수 있습니다.",
+  "expected_types": ["OTHER_CONDITION_MISMATCH"]
+},
+{
+  "case_id": "B030",
+  "description": "결제 방식, 가격, 배송 방식이 동시에 불일치",
+  "listing": "가격은 80만원이고 안전결제 가능하며 택배 거래 가능합니다.",
+  "chat": "90만원 받아야 합니다. 안전결제는 안 받고 계좌이체만 받습니다. 택배는 안 되고 직접 오셔야 합니다.",
+  "expected_types": [
+    "PAYMENT_METHOD_MISMATCH",
+    "PRICE_MISMATCH",
+    "DELIVERY_METHOD_MISMATCH"
+  ]
+},
+{
+  "case_id": "B031",
+  "description": "결제 완료 후 판매글과 다른 가격 조건이 확인됨",
+  "listing": "판매 가격은 80만원입니다.",
+  "chat": "80만원 송금 완료했습니다. 그런데 판매자가 실제 가격은 90만원이라며 10만원을 더 보내달라고 합니다.",
+  "expected_types": [
+    "PRICE_MISMATCH"
+  ],
+  "expected_trade_stage": "AFTER_PAYMENT"
+},
+{
+  "case_id": "B032",
+  "description": "결제 전이지만 채팅에서 명시적으로 사기를 의심하는 상황",
+  "listing": "아이폰 판매합니다.",
+  "chat": "아직 송금하지 않았습니다. 판매자가 계속 외부 링크 결제를 요구해서 사기가 의심됩니다.",
+  "expected_types": [],
+  "expected_trade_stage": "SUSPECTED_FRAUD"
+},
+{
+  "case_id": "B033",
+  "description": "결제는 완료했지만 피해가 발생했다는 근거는 없는 상황",
+  "listing": "아이폰 판매합니다. 택배 거래 가능합니다.",
+  "chat": "방금 결제 완료했습니다. 판매자가 내일 택배로 발송하기로 했습니다.",
+  "expected_types": [],
+  "expected_trade_stage": "AFTER_PAYMENT"
+},
+{
+  "case_id": "B034",
+  "description": "결제 후 판매자가 연락을 끊고 상품도 받지 못한 실제 피해 상황",
+  "listing": "아이폰 판매합니다.",
+  "chat": "이미 송금했는데 판매자가 연락을 끊었습니다. 약속한 날짜가 지났는데 상품도 받지 못했습니다.",
+  "expected_types": [],
+  "expected_trade_stage": "CONFIRMED_DAMAGE"
+},
+{
+  "case_id": "B035",
+  "description": "거래 조건은 일치하지만 현재 거래 단계를 판단할 정보가 없음",
+  "listing": "가격은 50만원이고 택배 거래 가능합니다.",
+  "chat": "네, 50만원이고 택배 거래 가능한 것 확인했습니다.",
+  "expected_types": [],
+  "expected_trade_stage": "UNKNOWN"
+},
+ {
+    "case_id": "B036",
+    "description": "판매자가 판매글 가격보다 낮은 가격을 제안한 정상 가격 조정",
+    "listing": "판매 가격은 50만원입니다.",
+    "chat": "판매자: 빨리 판매하고 싶어서 48만원에 드릴 수 있습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B037",
+    "description": "상품 가격은 유지되고 배송비만 별도로 안내한 정상 거래",
+    "listing": "상품 가격은 50만원입니다. 택배 거래 가능합니다.",
+    "chat": "상품 가격은 50만원이고 택배비 3천원은 별도입니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B038",
+    "description": "택배 가능 조건은 유지되고 택배사만 구체화된 정상 거래",
+    "listing": "택배 거래 가능합니다.",
+    "chat": "네, 택배 가능합니다. 우체국 택배로 보내드릴게요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B039",
+    "description": "중고 상품 상태를 채팅에서 더 구체적으로 설명한 정상 거래",
+    "listing": "사용감이 있는 중고 아이폰입니다.",
+    "chat": "사용감은 있고 모서리에 작은 생활기스가 하나 있습니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B040",
+    "description": "곧 송금하겠다는 표현만 있고 아직 결제하지 않은 거래 단계",
+    "listing": "아이폰 판매합니다. 가격은 70만원입니다.",
+    "chat": "구매자: 확인했습니다. 잠시 후 70만원 송금하겠습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "BEFORE_PAYMENT"
+  },
+  {
+    "case_id": "B041",
+    "description": "판매자가 결제를 요청했지만 구매자가 아직 결제하지 않은 거래 단계",
+    "listing": "아이폰 판매합니다.",
+    "chat": "판매자: 지금 입금해 주세요. 구매자: 아직 송금하지 않았습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "BEFORE_PAYMENT"
+  },
+  {
+    "case_id": "B042",
+    "description": "결제 완료 후 판매자 답변이 늦지만 피해가 확인되지 않은 거래 단계",
+    "listing": "아이폰 판매합니다. 택배 거래 가능합니다.",
+    "chat": "구매자: 어제 결제 완료했습니다. 판매자 답변이 조금 늦지만 오늘 발송 예정입니다.",
+    "expected_types": [],
+    "expected_trade_stage": "AFTER_PAYMENT"
+  },
+  {
+    "case_id": "B043",
+    "description": "결제 완료 후 상품 미수령과 연락 두절로 피해가 확인된 거래 단계",
+    "listing": "아이폰 판매합니다.",
+    "chat": "이미 결제했습니다. 약속한 배송일이 지났는데 상품을 받지 못했고 판매자도 연락이 두절됐습니다. 피해가 발생했습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "CONFIRMED_DAMAGE"
+  },
+  {
+    "case_id": "B044",
+    "description": "판매글 가격의 오타를 판매자가 채팅에서 정정하고 더 낮은 실제 가격을 안내한 정상 거래",
+    "listing": "아이폰 판매합니다. 가격은 80만원입니다.",
+    "chat": "판매자: 판매글 가격을 잘못 적었습니다. 실제 판매 가격은 78만원입니다. 78만원에 드릴게요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B045",
+    "description": "판매자가 판매글보다 높은 실제 상품 가격을 일방적으로 요구하는 가격 불일치",
+    "listing": "아이폰 판매합니다. 가격은 80만원입니다.",
+    "chat": "판매자: 판매글은 80만원이지만 실제로는 90만원을 보내주셔야 합니다.",
+    "expected_types": [
+      "PRICE_MISMATCH"
+    ]
+  },
+  {
+    "case_id": "B046",
+    "description": "직거래 가능 지역을 더 구체적으로 안내한 정상 거래",
+    "listing": "서울에서 직거래 가능합니다.",
+    "chat": "판매자: 직거래 가능합니다. 서울 강남역에서 만나면 됩니다.",
+    "expected_types": []
+  },
+  {
+    "case_id": "B047",
+    "description": "판매글에서는 직거래가 가능하지만 채팅에서는 직거래를 거부하는 불일치",
+    "listing": "서울에서 직거래 가능합니다.",
+    "chat": "판매자: 직거래는 절대 안 됩니다. 택배로만 거래하겠습니다.",
+    "expected_types": [
+      "DIRECT_TRADE_MISMATCH"
+    ]
+  },
+  {
+    "case_id": "B048",
+    "description": "판매글의 정상 작동 설명과 달리 채팅에서 핵심 기능 고장을 밝힌 상품 상태 불일치",
+    "listing": "모든 기능 정상 작동하는 아이폰입니다.",
+    "chat": "판매자: 확인해보니 Face ID는 작동하지 않습니다.",
+    "expected_types": [
+      "ITEM_CONDITION_MISMATCH"
+    ]
+  },
+  {
+    "case_id": "B049",
+    "description": "판매자가 입금 여부 확인을 요청하지만 실제 결제 완료 여부는 알 수 없는 상황",
+    "listing": "아이폰 판매합니다.",
+    "chat": "판매자: 입금하셨는지 확인 부탁드립니다. 구매자: 잠시만요, 확인해볼게요.",
+    "expected_types": [],
+    "expected_trade_stage": "UNKNOWN"
+  },
+  {
+    "case_id": "B050",
+    "description": "결제 완료 후 의심스러운 추가 결제 요구가 있어 명시적으로 사기를 의심하는 상황",
+    "listing": "아이폰 판매합니다. 가격은 70만원입니다.",
+    "chat": "구매자: 70만원은 이미 송금했습니다. 그런데 판매자가 보증금 20만원을 추가로 보내라고 해서 사기가 의심됩니다.",
+    "expected_types": [],
+    "expected_trade_stage": "SUSPECTED_FRAUD"
+  },
+  {
+    "case_id": "B051",
+    "description": "결제 후 추가 요구가 있었지만 상품 미수령과 연락 두절까지 발생해 실제 피해가 확인된 상황",
+    "listing": "아이폰 판매합니다. 가격은 70만원입니다.",
+    "chat": "구매자: 이미 70만원을 송금했습니다. 이후 추가 입금을 요구받았고, 약속한 배송일이 지났는데 상품을 받지 못했습니다. 판매자도 연락이 두절되어 피해가 발생했습니다.",
+    "expected_types": [],
+    "expected_trade_stage": "CONFIRMED_DAMAGE"
+  }
+
+]

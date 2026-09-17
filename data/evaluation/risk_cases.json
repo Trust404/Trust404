@@ -1,0 +1,273 @@
+[
+  {
+    "case_id": "RISK_001",
+    "description": "안전결제 거부",
+    "listing": "아이폰 15 Pro 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 받아요. 계좌이체로만 거래합니다.",
+    "expected_types": [
+      "SAFE_PAYMENT_REFUSAL",
+      "BANK_TRANSFER_ONLY"
+    ]
+  },
+  {
+    "case_id": "RISK_002",
+    "description": "명확한 선입금 요구",
+    "listing": "에어팟 Pro 판매합니다. 택배 거래 가능합니다.",
+    "chat": "구매하시려면 물건 확인 전에 예약금 5만원 먼저 보내주세요.",
+    "expected_types": [
+      "PREPAYMENT_REQUEST"
+    ]
+  },
+  {
+    "case_id": "RISK_003",
+    "description": "입금 재촉",
+    "listing": "닌텐도 스위치 판매합니다.",
+    "chat": "다른 분도 기다리고 있어서 10분 안에 입금하셔야 해요. 지금 바로 보내주세요.",
+    "expected_types": [
+      "PAYMENT_PRESSURE"
+    ]
+  },
+  {
+    "case_id": "RISK_004",
+    "description": "외부 메신저 이동 유도",
+    "listing": "갤럭시 S25 판매합니다.",
+    "chat": "여기 채팅은 불편하니까 카카오톡으로 연락 주세요. 아이디 알려드릴게요.",
+    "expected_types": [
+      "EXTERNAL_CONTACT"
+    ]
+  },
+  {
+    "case_id": "RISK_005",
+    "description": "안전결제 거부와 입금 재촉",
+    "listing": "아이패드 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 합니다. 지금 바로 입금하시면 오늘 발송할게요.",
+    "expected_types": [
+      "SAFE_PAYMENT_REFUSAL",
+      "PAYMENT_PRESSURE"
+    ]
+  },
+  {
+    "case_id": "RISK_006",
+    "description": "선입금 요구와 외부 연락 유도",
+    "listing": "그래픽카드 판매합니다.",
+    "chat": "예약하려면 먼저 3만원 보내주시고 자세한 이야기는 카톡으로 하죠.",
+    "expected_types": [
+      "PREPAYMENT_REQUEST",
+      "EXTERNAL_CONTACT"
+    ]
+  },
+  {
+    "case_id": "RISK_007",
+    "description": "정상적인 안전결제 거래",
+    "listing": "아이폰 판매합니다. 안전결제 가능합니다.",
+    "chat": "네, 안전결제로 진행하시면 됩니다. 확인 후 천천히 결제해주세요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "RISK_008",
+    "description": "정상적인 가격 협상",
+    "listing": "키보드 8만원에 판매합니다.",
+    "chat": "7만원까지 가능할까요?",
+    "expected_types": []
+  },
+  {
+    "case_id": "RISK_009",
+    "description": "정상적인 택배 거래",
+    "listing": "책 세트 판매합니다. 택배 가능합니다.",
+    "chat": "주소 알려주시면 포장해서 내일 발송하고 송장번호 보내드릴게요.",
+    "expected_types": []
+  },
+  {
+    "case_id": "RISK_010",
+    "description": "복합 고위험 거래",
+    "listing": "맥북 판매합니다. 안전결제 가능합니다.",
+    "chat": "안전결제는 안 하고요. 예약하려면 지금 계약금 먼저 보내주세요. 다른 사람도 보고 있으니 빨리 입금해주세요. 자세한 건 카톡으로 이야기하죠.",
+    "expected_types": [
+      "SAFE_PAYMENT_REFUSAL",
+      "PREPAYMENT_REQUEST",
+      "PAYMENT_PRESSURE",
+      "EXTERNAL_CONTACT"
+    ]
+  },
+{
+  "case_id": "RISK_011",
+  "description": "계좌이체만 요구",
+  "listing": "노트북 판매합니다. 결제 방식은 협의 가능합니다.",
+  "chat": "저는 계좌이체만 받아요. 다른 결제 방식은 안 합니다.",
+  "expected_types": [
+    "BANK_TRANSFER_ONLY"
+  ]
+},
+{
+  "case_id": "RISK_012",
+  "description": "정상적인 계좌이체 안내",
+  "listing": "책상 판매합니다. 직거래 가능합니다.",
+  "chat": "직거래하실 때 물건 확인하시고 괜찮으시면 그때 계좌이체하셔도 됩니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_013",
+  "description": "과도한 개인정보 요구",
+  "listing": "카메라 판매합니다.",
+  "chat": "거래 전에 주민등록번호와 신분증 앞뒤 사진을 보내주세요.",
+  "expected_types": [
+    "PERSONAL_INFO_REQUEST"
+  ]
+},
+{
+  "case_id": "RISK_014",
+  "description": "정상적인 배송 정보 요청",
+  "listing": "운동화 판매합니다. 택배 가능합니다.",
+  "chat": "택배 보내려면 받으실 분 성함, 주소, 연락처 부탁드립니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_015",
+  "description": "정상적인 연락처 교환",
+  "listing": "의자 판매합니다. 직거래 가능합니다.",
+  "chat": "도착하시면 연락 주세요. 전화번호는 010-1234-5678입니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_016",
+  "description": "외부 메신저 이동 유도",
+  "listing": "태블릿 판매합니다.",
+  "chat": "여기 말고 텔레그램으로 이야기하죠. 제 아이디는 seller123입니다.",
+  "expected_types": [
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_017",
+  "description": "기타 의심스러운 거래 조건",
+  "listing": "게임기 판매합니다.",
+  "chat": "상품 상태 확인은 제가 지정한 별도의 인증 절차를 완료한 뒤에만 가능합니다.",
+  "expected_types": [
+    "SUSPICIOUS_CONDITION"
+  ]
+},
+{
+  "case_id": "RISK_018",
+  "description": "개인정보 요구와 외부 연락 유도",
+  "listing": "스마트폰 판매합니다.",
+  "chat": "신분증 사진 먼저 보내주시고, 이후 대화는 카카오톡으로 진행하죠.",
+  "expected_types": [
+    "PERSONAL_INFO_REQUEST",
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_019",
+  "description": "안전결제 거부와 계좌이체만 요구",
+  "listing": "아이패드 판매합니다. 안전결제 가능합니다.",
+  "chat": "안전결제는 사용하지 않습니다. 계좌이체만 가능합니다.",
+  "expected_types": [
+    "SAFE_PAYMENT_REFUSAL",
+    "BANK_TRANSFER_ONLY"
+  ]
+},
+{
+  "case_id": "RISK_020",
+  "description": "복합 위험 거래",
+  "listing": "맥북 판매합니다. 안전결제 가능합니다.",
+  "chat": "안전결제는 안 하고 계좌이체만 받아요. 예약하려면 계약금 10만원 먼저 보내주시고, 다른 구매자도 있으니 지금 입금해주세요. 이후 대화는 카톡으로 하겠습니다.",
+  "expected_types": [
+    "SAFE_PAYMENT_REFUSAL",
+    "BANK_TRANSFER_ONLY",
+    "PREPAYMENT_REQUEST",
+    "PAYMENT_PRESSURE",
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_021",
+  "description": "정상적인 안전결제 거래",
+  "listing": "무선 이어폰 판매합니다. 안전결제 가능합니다.",
+  "chat": "네, 안전결제로 진행하시면 됩니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_022",
+  "description": "계좌이체가 선택 사항인 정상 거래",
+  "listing": "모니터 판매합니다. 안전결제와 직거래 모두 가능합니다.",
+  "chat": "편하신 방식으로 하시면 됩니다. 직거래 후 계좌이체도 괜찮습니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_023",
+  "description": "직거래를 위한 정상적인 연락처 교환",
+  "listing": "키보드 판매합니다. 강남역 직거래 가능합니다.",
+  "chat": "강남역 도착하시면 전화 주세요. 제 번호 알려드릴게요.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_024",
+  "description": "택배 발송을 위한 정상적인 개인정보 요청",
+  "listing": "책 판매합니다. 택배 가능합니다.",
+  "chat": "택배 발송을 위해 성함, 주소, 연락처 부탁드립니다.",
+  "expected_types": []
+},
+{
+  "case_id": "RISK_025",
+  "description": "입금 재촉만 존재하는 경우",
+  "listing": "게임기 판매합니다.",
+  "chat": "다른 구매자도 기다리고 있어서 거래하실 거면 지금 바로 입금해주세요.",
+  "expected_types": [
+    "PAYMENT_PRESSURE"
+  ]
+},
+{
+  "case_id": "RISK_026",
+  "description": "선입금 요구와 입금 재촉 동시 발생",
+  "listing": "카메라 판매합니다.",
+  "chat": "예약하시려면 예약금 5만원 먼저 보내주세요. 다른 분도 문의 중이니 지금 바로 입금 부탁드립니다.",
+  "expected_types": [
+    "PREPAYMENT_REQUEST",
+    "PAYMENT_PRESSURE"
+  ]
+},
+{
+  "case_id": "RISK_027",
+  "description": "안전결제 거부와 계좌이체 전용 및 외부 연락 유도",
+  "listing": "태블릿 판매합니다. 안전결제 가능합니다.",
+  "chat": "안전결제는 안 합니다. 계좌이체만 받고, 자세한 이야기는 카카오톡으로 하죠.",
+  "expected_types": [
+    "SAFE_PAYMENT_REFUSAL",
+    "BANK_TRANSFER_ONLY",
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_028",
+  "description": "과도한 개인정보 요구와 외부 메신저 유도",
+  "listing": "스마트워치 판매합니다.",
+  "chat": "거래 전에 신분증 사진을 보내주시고 이후 대화는 텔레그램으로 진행해주세요.",
+  "expected_types": [
+    "PERSONAL_INFO_REQUEST",
+    "EXTERNAL_CONTACT"
+  ]
+},
+{
+  "case_id": "RISK_029",
+  "description": "다른 유형으로 설명하기 어려운 의심스러운 거래 조건",
+  "listing": "게임기 판매합니다.",
+  "chat": "상품 상태를 확인하려면 제가 지정한 별도의 인증 절차를 먼저 완료해야 합니다.",
+  "expected_types": [
+    "SUSPICIOUS_CONDITION"
+  ]
+},
+{
+  "case_id": "RISK_030",
+  "description": "다수의 구체적인 위험 신호가 동시에 존재하는 복합 거래",
+  "listing": "맥북 판매합니다. 안전결제 가능합니다.",
+  "chat": "안전결제는 하지 않고 계좌이체만 받습니다. 예약금 10만원을 먼저 보내주시고 지금 바로 입금해주세요. 신분증 사진도 보내주시고 이후 대화는 텔레그램으로 하겠습니다.",
+  "expected_types": [
+    "SAFE_PAYMENT_REFUSAL",
+    "BANK_TRANSFER_ONLY",
+    "PREPAYMENT_REQUEST",
+    "PAYMENT_PRESSURE",
+    "PERSONAL_INFO_REQUEST",
+    "EXTERNAL_CONTACT"
+  ]
+}
+]
