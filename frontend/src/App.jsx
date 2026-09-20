@@ -42,6 +42,15 @@ function App() {
 그런데 며칠이 지나도 상품을 받지 못했습니다.
 판매자에게 계속 연락하고 있지만 답장이 없고 전화도 받지 않습니다.`,
     },
+
+    urlRisk: {
+      listing: `아이폰 15 Pro 판매합니다.
+상태 좋고 정상 작동합니다.
+가격은 100만원입니다.`,
+      chat: `안전결제 말고 아래 링크에서 결제해주세요.
+https://testsafebrowsing.appspot.com/s/phishing.html
+링크에서 결제하면 바로 발송하겠습니다.`,
+    },
   };
 
   const enumLabels = {
@@ -73,6 +82,19 @@ function App() {
     LOW: "낮음",
     MEDIUM: "보통",
     HIGH: "높음",
+  };
+
+  const urlStatusLabels = {
+    TRUSTED_MARKETPLACE: "공식 중고거래 플랫폼",
+    NO_KNOWN_THREAT: "알려진 위협 정보 없음",
+    THREAT_FOUND: "알려진 위협 정보 확인",
+    UNAVAILABLE: "조회 불가",
+  };
+
+  const threatTypeLabels = {
+    MALWARE: "악성코드",
+    SOCIAL_ENGINEERING: "피싱·사회공학",
+    UNWANTED_SOFTWARE: "원치 않는 소프트웨어",
   };
 
   const formatEnum = (value) => {
@@ -196,6 +218,10 @@ function App() {
               <button type="button" onClick={() => loadSample(samples.damage)}>
                 피해 발생 예시
               </button>
+
+              <button type="button" onClick={() => loadSample(samples.urlRisk)}>
+                외부 링크 예시
+              </button>
             </div>
           </div>
           <div className="input-grid">
@@ -283,6 +309,68 @@ function App() {
               <h3>분석 요약</h3>
               <p>{localizeText(result.summary)}</p>
 
+              {result.url_safety?.length > 0 && (
+                <>
+                  <h3>외부 링크 안전 확인</h3>
+
+                  {result.url_safety.map((item, index) => (
+                    <div
+                      className={`result-card url-safety-card ${item.status.toLowerCase()}`}
+                      key={`${item.url}-${index}`}
+                    >
+                      <div className="url-safety-header">
+                        <strong>{item.domain}</strong>
+
+                        <span
+                          className={`url-status ${item.status.toLowerCase()}`}
+                        >
+                          {urlStatusLabels[item.status] || item.status}
+                        </span>
+                      </div>
+
+                      <p className="url-address">{item.url}</p>
+
+                      {item.status === "THREAT_FOUND" && (
+                        <>
+                          <p className="url-warning">
+                            Google Safe Browsing에서 알려진 위협 정보가
+                            확인되었습니다. 해당 링크 이용 전 주의가 필요합니다.
+                          </p>
+
+                          {item.threat_types.length > 0 && (
+                            <p>
+                              <strong>탐지 유형:</strong>{" "}
+                              {item.threat_types
+                                .map((type) => threatTypeLabels[type] || type)
+                                .join(", ")}
+                            </p>
+                          )}
+                        </>
+                      )}
+
+                      {item.status === "NO_KNOWN_THREAT" && (
+                        <p className="url-safe-notice">
+                          알려진 위협 정보가 확인되지 않았습니다. 안전한
+                          링크임을 보장하는 것은 아닙니다.
+                        </p>
+                      )}
+
+                      {item.status === "TRUSTED_MARKETPLACE" && (
+                        <p className="url-safe-notice">
+                          등록된 공식 중고거래 플랫폼 도메인입니다.
+                        </p>
+                      )}
+
+                      {item.status === "UNAVAILABLE" && (
+                        <p className="url-unavailable">
+                          현재 링크 안전 정보를 확인하지 못했습니다.
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </>
+              )}
+
               <h3>대응 가이드</h3>
 
               <div className="result-card">
@@ -309,7 +397,7 @@ function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  경찰청 신고 이력 조회하기
+                  경찰청 공식 신고 이력 조회하기
                 </a>
 
                 <p className="fraud-history-notice">
@@ -358,7 +446,7 @@ function App() {
 
             <div className="guide-item">
               <span>4</span>
-              <p>위험 신호와 근거 확인</p>
+              <p>위험 신호 · 외부 링크 확인</p>
             </div>
           </div>
 

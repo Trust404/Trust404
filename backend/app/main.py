@@ -1,8 +1,10 @@
 import os
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from app.services.url_safety import check_url_safety
 from app.ai.risk_detection import RiskPattern, analyze_risk
 from app.ai.consistency import Inconsistency, analyze_consistency
 from app.services.risk_engine import RiskLevel, calculate_risk
@@ -28,6 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class AnalyzeRequest(BaseModel):
     listing: str
     chat: str
@@ -39,6 +42,13 @@ class GuidanceResponse(BaseModel):
     requires_official_source: bool
 
 
+class UrlSafetyResult(BaseModel):
+    url: str
+    domain: str
+    status: str
+    threat_types: list[str]
+
+
 class AnalyzeResponse(BaseModel):
     risk_score: int
     risk_level: RiskLevel
@@ -47,11 +57,14 @@ class AnalyzeResponse(BaseModel):
     trade_stage: str
     summary: str
 
-    # 기존 React 호환을 위해 일단 유지
+    # 기존 React 호환
     checkpoints: list[str]
 
-    # 9/15 Guidance 전체 정보
+    # Guidance 전체 정보
     guidance: GuidanceResponse
+
+    # 외부 URL 안전 확인
+    url_safety: list[UrlSafetyResult]
 
 
 @app.get("/")
@@ -73,13 +86,18 @@ def analyze(request: AnalyzeRequest):
         )
 
         risk_score, risk_level = calculate_risk(
-    patterns=risk_result.patterns,
-    inconsistencies=consistency_result.inconsistencies,
-    trade_stage=consistency_result.trade_stage,
-)
+            patterns=risk_result.patterns,
+            inconsistencies=consistency_result.inconsistencies,
+            trade_stage=consistency_result.trade_stage,
+        )
 
         guidance = get_guidance_structure(
             consistency_result.trade_stage
+        )
+
+        url_safety = check_url_safety(
+            listing=request.listing,
+            chat=request.chat,
         )
 
         return AnalyzeResponse(
@@ -90,15 +108,17 @@ def analyze(request: AnalyzeRequest):
             trade_stage=consistency_result.trade_stage,
             summary=risk_result.summary,
 
-            # 기존 화면용
             checkpoints=guidance["actions"],
 
-            # 새 Guidance 전체 정보
             guidance=GuidanceResponse(
                 goal=guidance["goal"],
                 actions=guidance["actions"],
-                requires_official_source=guidance["requires_official_source"],
+                requires_official_source=guidance[
+                    "requires_official_source"
+                ],
             ),
+
+            url_safety=url_safety,
         )
 
     except ValueError as error:
