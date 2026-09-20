@@ -14,14 +14,9 @@ from app.ai.prompts.risk_prompt import (
 )
 
 
-# backend/.env 파일 불러오기
 ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(ENV_PATH)
 
-
-# -----------------------------
-# A의 Structured Output 정의
-# -----------------------------
 
 class RiskPattern(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -46,6 +41,7 @@ class RiskAnalysis(BaseModel):
     patterns: list[RiskPattern]
     summary: str
 
+
 def filter_normal_direct_trade_contact(
     result: RiskAnalysis,
     listing: str,
@@ -53,10 +49,8 @@ def filter_normal_direct_trade_contact(
 ) -> RiskAnalysis:
     combined = f"{listing}\n{chat}"
 
-    # 직거래 상황인지 확인
     is_direct_trade = "직거래" in combined
 
-    # 직거래 만남을 위한 정상적인 연락 표현
     normal_contact_phrases = [
         "도착하시면 전화",
         "도착하면 전화",
@@ -71,7 +65,6 @@ def filter_normal_direct_trade_contact(
         for phrase in normal_contact_phrases
     )
 
-    # 실제로 거래 대화를 외부 채널로 이동시키는 표현
     external_channel_markers = [
         "카카오톡",
         "카톡",
@@ -89,8 +82,6 @@ def filter_normal_direct_trade_contact(
         for marker in external_channel_markers
     )
 
-    # 직거래 + 도착 연락이고,
-    # 명시적인 외부 채널 이동 표현이 없다면 EXTERNAL_CONTACT 제거
     if is_direct_trade and has_normal_contact and not has_external_move:
         filtered_patterns = [
             pattern
@@ -98,7 +89,6 @@ def filter_normal_direct_trade_contact(
             if pattern.type != "EXTERNAL_CONTACT"
         ]
 
-        # EXTERNAL_CONTACT가 실제로 제거된 경우에만 summary도 정리
         if len(filtered_patterns) != len(result.patterns):
             if not filtered_patterns:
                 summary = "탐지된 위험 신호가 없습니다."
@@ -119,10 +109,6 @@ def filter_normal_direct_trade_contact(
 
     return result
 
-
-# -----------------------------
-# OpenAI API 호출 함수
-# -----------------------------
 
 def analyze_risk(listing: str, chat: str) -> RiskAnalysis:
     if not listing.strip() and not chat.strip():
@@ -168,13 +154,13 @@ def analyze_risk(listing: str, chat: str) -> RiskAnalysis:
 
         result = RiskAnalysis.model_validate_json(
             response.output_text
-)
+        )
 
         return filter_normal_direct_trade_contact(
             result=result,
             listing=listing,
             chat=chat,
-)
+        )
 
     except openai.APITimeoutError:
         raise RuntimeError(
@@ -201,10 +187,6 @@ def analyze_risk(listing: str, chat: str) -> RiskAnalysis:
             "AI 분석 결과 형식이 올바르지 않습니다."
         )
 
-
-# -----------------------------
-# 임시 실행 테스트
-# -----------------------------
 
 if __name__ == "__main__":
     test_listing = """
