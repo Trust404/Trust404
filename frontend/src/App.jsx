@@ -96,6 +96,19 @@ function App() {
     setError("");
   };
 
+  const handleHome = () => {
+    setListing("");
+    setChat("");
+    setResult(null);
+    setError("");
+    setLoading(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const handleAnalyze = async () => {
     setLoading(true);
     setError("");
@@ -153,10 +166,17 @@ function App() {
       {/* 기존 서비스 영역 */}
       <div className="container">
         <header className="header">
-          <h1>Trust404</h1>
+          <button
+            type="button"
+            className="home-button"
+            onClick={handleHome}
+            aria-label="Trust404 첫 화면으로 돌아가기"
+          >
+            Trust404
+          </button>
+
           <p>AI 기반 중고거래 사기 위험 분석</p>
         </header>
-
         <main className="form">
           <div className="sample-section">
             <p className="sample-title">예시 거래로 체험해보세요</p>

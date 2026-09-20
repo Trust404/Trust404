@@ -12,6 +12,33 @@ body {
   width: 100%;
 }
 
+.home-button {
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 8px;
+
+  border: none;
+  background: transparent;
+
+  color: #172033;
+  font-family: inherit;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -1px;
+
+  cursor: pointer;
+}
+
+.home-button:hover {
+  color: #4f46e5;
+}
+
+.home-button:focus-visible {
+  outline: 3px solid rgba(79, 70, 229, 0.2);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 .container {
   width: 100%;
   max-width: 1100px;
@@ -160,11 +187,6 @@ body {
   margin-bottom: 36px;
 }
 
-.header h1 {
-  margin: 0 0 8px;
-  font-size: 34px;
-  letter-spacing: -1px;
-}
 
 .header p {
   margin: 0;
@@ -375,50 +397,7 @@ body {
 }
 
 
-/* 모바일 */
-@media (max-width: 768px) {
-  .container {
-    padding: 24px 16px;
-  }
-
-  .header {
-    margin-bottom: 28px;
-  }
-
-  .header h1 {
-    font-size: 28px;
-  }
-
-  .form {
-    gap: 20px;
-  }
-
-  .input-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .input-group {
-    padding: 16px;
-  }
-
-  .input-group textarea {
-    min-height: 180px;
-    padding: 14px;
-  }
-
-  .sample-buttons {
-    flex-direction: column;
-  }
-
-  .sample-buttons button {
-    width: 100%;
-  }
-
-  .result-card {
-    padding: 14px;
-  }
-
- /* 큰 화면보다 작아지면 좌우 사이드 카드 숨김 */
+/* 큰 화면보다 작아지면 좌우 사이드 카드 숨김 */
 @media (max-width: 1400px) {
   .page-layout {
     display: block;
@@ -445,7 +424,7 @@ body {
     margin-bottom: 28px;
   }
 
-  .header h1 {
+  .home-button {
     font-size: 28px;
   }
 
@@ -477,5 +456,4 @@ body {
   .result-card {
     padding: 14px;
   }
-}
 }
