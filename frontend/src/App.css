@@ -396,6 +396,41 @@ body {
   font-weight: 700;
 }
 
+.fraud-history-card {
+  border-left: 4px solid #4f46e5;
+}
+
+.fraud-history-card h3 {
+  margin-top: 0;
+}
+
+.fraud-history-button {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 11px 16px;
+
+  border-radius: 8px;
+
+  background: #4f46e5;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.fraud-history-button:hover {
+  background: #4338ca;
+}
+
+.fraud-history-notice {
+  margin-top: 12px !important;
+  color: #64748b;
+  font-size: 13px;
+}
+
 
 /* 큰 화면보다 작아지면 좌우 사이드 카드 숨김 */
 @media (max-width: 1400px) {
