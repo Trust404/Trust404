@@ -282,6 +282,7 @@ function App() {
 
               <h3>분석 요약</h3>
               <p>{localizeText(result.summary)}</p>
+
               <h3>대응 가이드</h3>
 
               <div className="result-card">
@@ -292,6 +293,28 @@ function App() {
                     공식 기관의 신고·피해 대응 절차 확인이 필요한 단계입니다.
                   </p>
                 )}
+              </div>
+
+              <div className="result-card fraud-history-card">
+                <h3>🔎 사기 신고 이력 확인</h3>
+
+                <p>
+                  거래 상대방의 전화번호, 계좌번호 또는 이메일 신고 이력을
+                  경찰청 공식 서비스에서 추가로 확인해보세요.
+                </p>
+
+                <a
+                  className="fraud-history-button"
+                  href="https://www.police.go.kr/www/security/cyber/cyber04.jsp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  경찰청 신고 이력 조회하기
+                </a>
+
+                <p className="fraud-history-notice">
+                  신고 이력이 없더라도 안전한 거래를 보장하지 않습니다.
+                </p>
               </div>
               <h3>확인 체크포인트</h3>
 
