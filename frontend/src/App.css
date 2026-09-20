@@ -2,16 +2,159 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  background: #f6f8fc;
+  color: #172033;
+}
+
 #root {
   width: 100%;
 }
 
 .container {
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 48px 20px;
+  max-width: 1100px;
+  padding: 48px 28px;
 }
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+/* 전체 3단 레이아웃 */
+.page-layout {
+  width: 100%;
+  max-width: 1580px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1100px) 220px;
+  gap: 24px;
+
+  align-items: start;
+  justify-content: center;
+}
+
+/* 좌우 정보 영역 */
+.side-info {
+  position: sticky;
+  top: 32px;
+  align-self: start;
+  margin-top: 150px;
+}
+
+.side-card {
+  padding: 20px;
+
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.05);
+}
+
+.side-card h3 {
+  margin: 8px 0 10px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.side-label {
+  display: inline-block;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+
+  color: #4f46e5;
+}
+
+.side-description {
+  margin: 0 0 18px;
+
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* 왼쪽 위험 신호 */
+.risk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.risk-list li {
+  padding: 9px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.risk-list li:last-child {
+  border-bottom: none;
+}
+
+/* 오른쪽 사용 방법 */
+.guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-top: 18px;
+}
+
+.guide-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guide-item span {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eef2ff;
+  color: #4338ca;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.guide-item p {
+  margin: 0;
+
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.privacy-notice {
+  margin-top: 20px;
+  padding: 12px;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+  color: #64748b;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 
 .header {
   margin-bottom: 36px;
@@ -19,12 +162,13 @@
 
 .header h1 {
   margin: 0 0 8px;
-  font-size: 32px;
+  font-size: 34px;
+  letter-spacing: -1px;
 }
 
 .header p {
   margin: 0;
-  color: #666;
+  color: #64748b;
 }
 
 .form {
@@ -33,23 +177,67 @@
   gap: 24px;
 }
 
+/* 샘플 거래 */
+.sample-section {
+  padding: 18px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.sample-title {
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.sample-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sample-buttons button {
+  flex: 1;
+  min-width: 140px;
+  padding: 11px 14px;
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sample-buttons button:hover {
+  border-color: #4f46e5;
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+/* 입력 영역 */
 .input-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  padding: 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
 }
 
 .input-group label {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .input-group textarea {
   width: 100%;
-  min-height: 180px;
+  min-height: 220px;
   padding: 16px;
 
   border: 1px solid #d0d0d0;
   border-radius: 8px;
+  background: #fbfcfe;
 
   font-size: 16px;
   font-family: inherit;
@@ -60,31 +248,41 @@
 
 .input-group textarea:focus {
   outline: none;
-  border-color: #555;
+  border-color: #4f46e5;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
+/* 분석 버튼 */
 .analyze-button {
   width: 100%;
-  padding: 14px 20px;
+  padding: 15px 20px;
 
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+
+  background: #4f46e5;
+  color: white;
 
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
 
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .analyze-button:hover:not(:disabled) {
-  opacity: 0.85;
+  background: #4338ca;
+  transform: translateY(-1px);
 }
 
 .analyze-button:disabled {
+  background: #cbd5e1;
+  color: white;
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
+/* 결과 */
 .result-section {
   margin-top: 24px;
   padding-top: 24px;
@@ -103,12 +301,15 @@
 
 .result-card {
   margin-bottom: 12px;
-  padding: 16px;
+  padding: 18px;
 
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
 
   line-height: 1.5;
+
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
 }
 
 .result-card p {
@@ -124,18 +325,60 @@
   margin-top: 8px;
 }
 
+/* 위험 등급 */
+.risk-badge {
+  display: inline-block;
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.risk-badge.low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.risk-badge.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.risk-badge.high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* 에러 */
 .error-message {
   padding: 16px;
 
-  border: 1px solid #ccc;
+  border: 1px solid #fecaca;
   border-radius: 8px;
+
+  background: #fef2f2;
+  color: #991b1b;
 
   line-height: 1.5;
 }
 
-@media (max-width: 600px) {
+.trade-stage {
+  display: inline-block;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 700;
+}
+
+
+/* 모바일 */
+@media (max-width: 768px) {
   .container {
-    padding: 24px 20px;
+    padding: 24px 16px;
   }
 
   .header {
@@ -150,53 +393,89 @@
     gap: 20px;
   }
 
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .input-group {
+    padding: 16px;
+  }
+
   .input-group textarea {
     min-height: 180px;
     padding: 14px;
   }
 
-  .result-card {
-    padding: 14px;
-  }
-
-  .sample-section {
-  padding: 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.sample-title {
-  margin: 0 0 12px;
-  font-weight: 600;
-}
-
-.sample-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.sample-buttons button {
-  flex: 1;
-  min-width: 140px;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
-}
-
-.sample-buttons button:hover {
-  background: #f5f5f5;
-}
-
-@media (max-width: 600px) {
   .sample-buttons {
     flex-direction: column;
   }
 
   .sample-buttons button {
     width: 100%;
+  }
+
+  .result-card {
+    padding: 14px;
+  }
+
+ /* 큰 화면보다 작아지면 좌우 사이드 카드 숨김 */
+@media (max-width: 1400px) {
+  .page-layout {
+    display: block;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .container {
+    margin: 0 auto;
+  }
+
+  .side-info {
+    display: none;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .form {
+    gap: 20px;
+  }
+
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .input-group {
+    padding: 16px;
+  }
+
+  .input-group textarea {
+    min-height: 180px;
+    padding: 14px;
+  }
+
+  .sample-buttons {
+    flex-direction: column;
+  }
+
+  .sample-buttons button {
+    width: 100%;
+  }
+
+  .result-card {
+    padding: 14px;
   }
 }
 }
