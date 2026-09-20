@@ -7,7 +7,7 @@
 
 > 🏆 Wanted AI Championship 2026 출품작
 
-[🌐 Trust404 서비스 체험하기](서비스_URL_입력)
+[🌐 Trust404 서비스 체험하기](https://trust404.vercel.app)
 
 ---
 
@@ -352,7 +352,7 @@ Trust404는 **2인 팀 프로젝트**로 진행했습니다.
 
 ### Trust404
 
-👉 **[서비스 바로가기](서비스_URL_입력)**
+👉 **[서비스 바로가기](https://trust404.vercel.app)**
 
 별도의 개발 환경 구축 없이  
 배포된 웹 서비스에서 Trust404의 핵심 기능을 직접 체험할 수 있습니다.
