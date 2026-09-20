@@ -102,7 +102,9 @@ function App() {
     setResult(null);
 
     try {
-      const response = await fetch("/analyze", {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "";
+
+      const response = await fetch(`${apiBaseUrl}/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
